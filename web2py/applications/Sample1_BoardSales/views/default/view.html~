@@ -1,0 +1,10 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+<h1>Post</h1>
+
+{{=form}}
+
+<p>
+{{=A('Back to full listings', _class='btn', _href=URL('default', 'index'))}}
+</p>

@@ -1,0 +1,19 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+{{block head}}
+<!-- This hides the "content" label of the form. -->
+<style>
+label#no_table_body__label { display: none; }
+</style>
+{{end}}
+
+<h1>{{=display_error}}</h1>
+
+{{=represent_wiki(content)}}
+
+<p>{{=A('Create New Page', _class='btn', _href=URL('default', 'index', args=[title]
+                                   ))}}</p>
+
+{{pass}}
+

@@ -1,0 +1,16 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+<h1>{{=title}}</h1>
+
+<!--{{=content}}-->
+
+{{if editing:}}
+{{=content}}
+{{else:}}
+{{=represent_wiki(form)}}
+
+<!-- You need to put here buttons to see the revision history (to implement later),
+and to edit (to implement now). -->
+
+{{pass}}

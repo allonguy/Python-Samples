@@ -1,0 +1,12 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+
+<p>
+{{=A('Back to full listings', _class='btn', _href=URL('default', 'index'))}}
+</p>
+
+<h1>Edit your post</h1>
+
+{{=form}}
+

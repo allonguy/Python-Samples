@@ -1,0 +1,29 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+<h1>{{=display_title}}</h1>
+
+{{if editing:}}
+    {{=content}}    
+{{else:}}
+    {{=error}}
+    {{=represent_wiki(content)}}
+    {{=b_edit}}
+{{pass}}
+
+<p></p>
+
+{{if new is False and home is False:}}
+    {{=A('Edit', _class='btn', _href=URL('default', 'index', args=[title],
+                                             vars=dict(edit='true')))}}
+{{pass}}
+
+{{if home is True:}}
+    {{=layout}}
+    {{=A('Create Page', _class='btn', _href=URL('default', 'create'))}}
+
+{{pass}}
+<!-- You need to put here buttons to see the revision history (to implement later),
+and to edit (to implement now). -->
+
+

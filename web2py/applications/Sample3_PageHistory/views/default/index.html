@@ -1,0 +1,62 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,('message' in globals())}}
+{{extend 'layout.html'}}
+
+<h1>{{=display_title}}</h1>
+
+<!-- Contents when editing and not -->
+{{if editing:}}
+    {{=content}}    
+{{else:}}
+    {{=error}}
+    {{=represent_wiki(content)}}
+    {{=b_edit}}
+{{pass}}
+
+<p></p>
+
+<!-- Contents and buttons when page is already made -->
+{{if new is False and home is False and hist is False and editing is False:}}
+    {{=A('Edit', _class='btn', _href=URL('default', 'index', args=[title],
+                                             vars=dict(edit='true')))}}
+    {{=A('History', _class='btn', _href=URL('default', 'index', args=[title],
+                                             vars=dict(history='true')))}}
+{{pass}}
+
+<!-- Index -->
+{{if home is True:}}
+    {{=layout}}
+    {{=A('Create Page', _class='btn', _href=URL('default', 'create'))}}
+
+{{pass}}
+
+<!-- If history is clicked -->
+<ul>
+{{if hist is True:}}
+
+    {{for r in revisions:}}
+         <li>
+         <!-- Check if client is logged in or not -->
+         {{if r.author is None:}}
+              Revision #: {{=r.id}} | Author: {{=request.client}} | Date created: {{=r.date_created}}
+              ({{=A('View', _href=URL('default', 'view', args=[r.id], vars=dict(t=title)))}})
+         {{else:}}
+              Revision #: {{=r.id}} | Author: {{=db.auth_user(id=r.author).first_name}} | Date created: {{=r.date_created}}
+              ({{=A('View', _href=URL('default', 'view', args=[r.id], vars=dict(t=title)))}})
+         {{pass}}
+         <p>             
+         {{=A("Revert to this Revision", _href=URL('default', 'revert', args=[title], vars=dict
+         (revbody=r.body, pageid=r.page_id, revdate=r.date_created)))}}
+         </p>
+         <p>             
+         Comment: {{=r.revision_comment}} 
+         </p>
+         </li>
+         {{pass}}
+</ul>
+<!--Back button-->
+{{=A('Back', _class='btn', _href=URL('default', 'index', args=[title]))}}
+{{pass}} 
+
+
+
+
